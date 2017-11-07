@@ -3,13 +3,10 @@ h1 {
   text-align: center;
 }
 
-textarea
+input
 {
   -moz-border-radius: 15px;
  border-radius: 15px;
     border:solid 1px black;
     padding:5px;
-
-    font-family: Poppins, sans-serif;
-    font-size: 12px;
 }
