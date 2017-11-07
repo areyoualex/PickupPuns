@@ -1,6 +1,6 @@
 {
     "name": "PickupPuns",
-    "version": "0.1 dev",
+    "version": "0.0.1",
     "description": "PickupPuns",
     "main": "server.js"
 }
