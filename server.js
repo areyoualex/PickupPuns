@@ -1,18 +1,33 @@
 'use strict';
 
+//Use modules express and http
 const express = require('express');
+const app = express();
+const http = require('http').Server(app);
+
+//Use socketIO and path
 const socketIO = require('socket.io');
 const path = require('path');
 
+//Variables for server port (for heroku) and index.html
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
-const server = express()
-  .use((req, res) => res.sendFile(INDEX) )
-  .use(express.static('root'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+//Sends index.html
+app.get('/', (req, res) => {
+  res.sendFile(INDEX);
+})
 
-const io = socketIO(server);
+//Sends static files like CSS, JS, images, etc.
+app.use(express.static('.'));
+
+//Listen on port 3000 or whatever port the app is running on
+http.listen(3000, ()=> {
+  console.log('listening on *:3000 owo');
+})
+
+//socketIO stuff
+const io = socketIO(http);
 
 io.on('connection', (socket) => {
   console.log('Client connected');
