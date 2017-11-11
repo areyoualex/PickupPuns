@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 app.use(express.static('.'));
 
 //Listen on port 3000 or whatever port the app is running on
-http.listen(3000, ()=> {
+http.listen(PORT, ()=> {
   console.log('listening on *:3000 owo');
 })
 
