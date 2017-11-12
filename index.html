@@ -16,7 +16,10 @@
       <script src="game.js"></script>
 
       <form action="#">
-  			<input spellcheck="true" type="text" id="text" name="text_name" style="width: 300px; height: 15px;" />
+  			<input spellcheck="true" type="text" id="text" name="text_name"
+        style="width: 300px; height: 15px;"
+        onCopy="return false" onDrag="return false" onDrop="return false"
+        onPaste="pasteNotice(); return false"/>
   			<br>
         <button>Pun!</button>
       </form>
