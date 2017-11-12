@@ -23,15 +23,25 @@ app.use(express.static('.'));
 
 //Listen on port 3000 or whatever port the app is running on
 http.listen(PORT, ()=> {
-  console.log('listening on *:3000 owo');
+  console.log('listening on *:'+ PORT + ' o3o');
 })
 
 //socketIO stuff
 const io = socketIO(http);
 
-io.on('connection', (socket) => {
-  console.log('Client connected');
-  socket.on('disconnect', () => console.log('Client disconnected'));
+//Start the socket connection
+io.on('connection', function(socket){
+  //Console debug - leave commented out
+  //console.log('a user connected');
+
+  //What to do upon receiving a pun
+  socket.on('pun', function(msg){
+    //Output to console
+    console.log('pun: ' + msg);
+
+    //Emit to all connected clients except sender
+    socket.broadcast.emit('pun received', msg);
+  });
 });
 
 setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
