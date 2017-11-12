@@ -15,7 +15,7 @@ can make local tests without pushing to master. </br></br>
 Once you have it installed, open up a terminal, `cd` to the repository directory, and type:
 ```
 npm install
-node server.js
+npm start
 ```
 This will start up an instance of the server at [localhost:3000](http://localhost:3000)! Remember to close and restart the
 server if you ever update the actual server code.
