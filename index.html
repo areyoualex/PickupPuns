@@ -1,28 +1,30 @@
 <!doctype html>
 <html>
-    <head>
-        <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-        <title>Pickup Puns!</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="style.css" type="text/css">
-    </head>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <title>Pickup Puns!</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css" type="text/css">
+  </head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <body>
-        </script src="https://cdn.rawgit.com/downloads/uxebu/bonsai/bonsai-0.4.1.min.js">
+      </script src="https://cdn.rawgit.com/downloads/uxebu/bonsai/bonsai-0.4.1.min.js">
 
-        <h1>Pickup Puns!</h1>
+      <h1>Pickup Puns!</h1>
 
-        <script src="game.js"></script>
+      <script src="game.js"></script>
 
-        <form action="#" onsubmit="return addPun()" method="post">
-    			<input type="text" id="text" name="text_name" style="width: 300px; height: 15px;" />
-    			<br>
-    			<input type="submit" value="Pun!">
-        </form>
+      <form action="#">
+  			<input type="text" id="text" name="text_name" style="width: 300px; height: 15px;" />
+  			<br>
+        <button>Pun!</button>
+      </form>
 
-        <div>
-            <ul id="punlist">
-            </ul>
-        </div>
+      <div>
+          <ul id="punlist">
+          </ul>
+      </div>
 
 
     <section class="module">
