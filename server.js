@@ -30,11 +30,11 @@ http.listen(PORT, ()=> {
 const io = socketIO(http);
 
 //Create timer
-var timer = 0;
-var theTimer = setInterval(()=>{
-  if (timer < 180) timer++;
+var timer = 180;
+setInterval(()=>{
+  if (timer > 0) timer--;
   else {
-    timer = 0;
+    timer = 180;
     io.emit('timer', timer);
   }
 }, 1000);
@@ -44,10 +44,8 @@ io.on('connection', function(socket){
   //Console debug - leave commented out
   //console.log('a user connected');
 
-  //Give the time when requested
-  socket.on('get time', (m)=>{
-    socket.emit('timer', timer);
-  });
+  //Give time on connect
+  socket.emit('timer', timer);
 
   //What to do upon receiving a pun
   socket.on('pun', function(msg){
@@ -55,7 +53,7 @@ io.on('connection', function(socket){
     console.log('pun: ' + msg);
 
     //Emit to all connected clients except sender
-    socket.broadcast.emit('pun received', msg);
+    socket.broadcast.emit('pun', msg);
   });
 });
 

@@ -11,6 +11,8 @@ $(function () {
 
     puns.innerHTML = puns.innerHTML + "<li> <p>You said: </p>"
       + document.getElementById('text').value + "</li>";
+      
+    puns.scrollTop = puns.scrollHeight;
 
     socket.emit('pun', $('#text').val());
     $('#text').val('');
@@ -25,14 +27,16 @@ $(function () {
   socket.on('timer', (t)=> { timer = t; });
 
   //Upon receiving a pun from the server
-  socket.on('pun received', (msg)=> {
+  socket.on('pun', (msg)=> {
     puns.innerHTML = puns.innerHTML + "<li> <p>They said: </p>" + msg + "</li>"
+    puns.scrollTop = puns.scrollHeight;
   });
 });
 
 setInterval(()=>{
   document.getElementById('time').innerHTML = timer + " seconds";
-  timer++;
+  timer--;
+  if(timer == 0){ io(); }
 }, 1000);
 
 function pasteNotice(){

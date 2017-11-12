@@ -4,6 +4,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <title>Pickup Puns!</title>
     <meta charset="utf-8">
+    <meta name=viewport content='width=500'>
     <link rel="stylesheet" href="style.css" type="text/css">
   </head>
   <script src="/socket.io/socket.io.js"></script>
@@ -15,18 +16,18 @@
       <h2 id="time"></h2>
 
       <script src="game.js"></script>
+      <div id="pungame">
+        <ul id="punlist">
+        </ul>
 
-      <form action="#">
-  			<input spellcheck="true" type="text" id="text" name="text_name"
-        style="width: 300px; height: 15px;"
-        onCopy="return false" onDrag="return false" onDrop="return false"
-        onPaste="pasteNotice(); return false"/>
-  			<br>
-        <button>Pun!</button>
-      </form>
-
-      <ul id="punlist">
-      </ul>
+        <form action="#" id="puninput">
+    			<input spellcheck="true" type="text" id="text" name="text_name"
+          onCopy="return false" onDrag="return false" onDrop="return false"
+          onPaste="pasteNotice(); return false"/>
+    			<br>
+          <button>Pun!</button>
+        </form>
+      </div>
 
 	</body>
 </html>
