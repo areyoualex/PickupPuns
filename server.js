@@ -29,10 +29,25 @@ http.listen(PORT, ()=> {
 //socketIO stuff
 const io = socketIO(http);
 
+//Create timer
+var timer = 0;
+var theTimer = setInterval(()=>{
+  if (timer < 180) timer++;
+  else {
+    timer = 0;
+    io.emit('timer', timer);
+  }
+}, 1000);
+
 //Start the socket connection
 io.on('connection', function(socket){
   //Console debug - leave commented out
   //console.log('a user connected');
+
+  //Give the time when requested
+  socket.on('get time', (m)=>{
+    socket.emit('timer', timer);
+  });
 
   //What to do upon receiving a pun
   socket.on('pun', function(msg){
