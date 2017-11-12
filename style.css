@@ -11,6 +11,9 @@ input
     padding:5px;
 }
 
+#punlist li p {
+  font-weight: bold;
+}
 
 @import "compass/css3";
 
@@ -50,7 +53,7 @@ input
     padding-top: 5px;
   }
   > * {
-    position: relative; 
+    position: relative;
   }
   &::before {
     content: "";

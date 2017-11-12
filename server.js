@@ -29,10 +29,18 @@ http.listen(PORT, ()=> {
 //socketIO stuff
 const io = socketIO(http);
 
+//Start the socket connection
 io.on('connection', function(socket){
-  console.log('a user connected');
+  //Console debug - leave commented out
+  //console.log('a user connected');
+
+  //What to do upon receiving a pun
   socket.on('pun', function(msg){
+    //Output to console
     console.log('pun: ' + msg);
+
+    //Emit to all connected clients except sender
+    socket.broadcast.emit('pun received', msg);
   });
 });
 
