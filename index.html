@@ -8,11 +8,17 @@
     </head>
     <body>
         </script src="https://cdn.rawgit.com/downloads/uxebu/bonsai/bonsai-0.4.1.min.js">
+
         <h1>Pickup Puns!</h1>
+
         <script src="game.js"></script>
-  			<input type="text" id="text" name="text_name" style="width: 300px; height: 15px;" />
-  			<br>
-  			<input type="button" value="Pun!" onclick="addPun()" onsubmit="addPun()">
+
+        <form action="#" onsubmit="return addPun()" method="post">
+    			<input type="text" id="text" name="text_name" style="width: 300px; height: 15px;" />
+    			<br>
+    			<input type="submit" value="Pun!">
+        </form>
+
         <div>
             <ul id="punlist">
             </ul>
