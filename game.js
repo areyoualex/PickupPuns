@@ -34,10 +34,13 @@ $(function () {
 });
 
 setInterval(()=>{
-  document.getElementById('time').innerHTML = timer + " seconds";
+  document.getElementById('time').innerHTML = window.minutes + " minutes " + window.seconds + " seconds";
   timer--;
   if(timer == 0){ io(); }
 }, 1000);
+
+  window.minutes = timer/60;
+  window.seconds = timer%60
 
 function pasteNotice(){
   alert("Please don't paste pick up lines! Naughty!");
