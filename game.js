@@ -11,9 +11,14 @@ $(function () {
   $('#signin').submit(function(e){
     //Prevent page refresh
     e.preventDefault();
+
+    //Make pungame visible
     document.getElementById('signin').style.display = "none";
     document.getElementById('pungame').style.display = "block";
+    var elements = document.getElementById('signin').getElementsByTagName('input');
+    socket.emit('join game', elements[1].value, elements[0].value);
   });
+
   //Get pun <ul> element
   var puns = document.getElementById('punlist');
 

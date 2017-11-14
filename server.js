@@ -39,10 +39,16 @@ setInterval(()=>{
   }
 }, 1000);
 
+//Create rooms array
+var rooms = [];
+
 //Start the socket connection
 io.on('connection', function(socket){
   //Console debug - leave commented out
   //console.log('a user connected');
+
+  //Variable for this sockets current room index
+  var i;
 
   //Give time on connect
   socket.emit('timer', timer);
@@ -53,7 +59,34 @@ io.on('connection', function(socket){
     console.log('pun: ' + msg);
 
     //Emit to all connected clients except sender
-    socket.broadcast.emit('pun', msg);
+    io.to(rooms[i]).emit('pun', msg);
+  });
+
+  //On receiving a join game message
+  socket.on('join game', function(name, username){
+    socket.join(name);
+
+    //Loop through rooms and find room
+    var hasRoom = false;
+    for(i = 0; i < rooms.length; i++){
+      if (rooms[i].name == name){
+        hasRoom = true;
+        break;
+      }
+    }
+
+    //If rooms doesn't have this room, add it to rooms
+    if(hasRoom == false){
+      rooms[rooms.length] = { name: name, users: [] };
+    }
+
+    //Add this user to room users
+    rooms[i].users[rooms[i].users.length] = socket.id;
+
+    //Debug output
+    console.log(name);
+    console.log(rooms[i]);
+    console.log("joined by " + username);
   });
 });
 
