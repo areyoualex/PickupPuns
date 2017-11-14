@@ -7,9 +7,10 @@ input
 {
   -moz-border-radius: 15px;
  border-radius: 15px;
+    -ms-wrap-margin: 
     border:solid 1px black;
     padding:5px;
-    width: 100%;
+    width: 350%;
     height: 15px;
 }
 
@@ -18,10 +19,12 @@ input
 }
 
 #punlist {
-  float: left;
+  /*float: middle;
+  */
   width: 100%;
   height: 60%;
   overflow-y: scroll;
+  margin:auto
 }
 
 #puninput {
