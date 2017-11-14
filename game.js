@@ -1,5 +1,5 @@
 //Timer variable
-var timer;
+window.timer;
 
 $(function () {
   var puns = document.getElementById('punlist');
@@ -34,13 +34,25 @@ $(function () {
 });
 
 setInterval(()=>{
-  document.getElementById('time').innerHTML = window.minutes + " minutes " + window.seconds + " seconds";
-  timer--;
-  if(timer == 0){ io(); }
+  if(Math.floor(window.minutes) != 1 && Math.floor(window.minutes) != 0){
+    document.getElementById('time').innerHTML = Math.floor(window.minutes) + " minutes " + window.seconds + " seconds";
+    window.timer--;
+  } else if (Math.floor(window.minutes) == 0){
+    document.getElementById('time').innerHTML = window.seconds + " seconds";
+    window.timer--;
+  } else {  
+    document.getElementById('time').innerHTML = Math.floor(window.minutes) + " minute " + window.seconds + " seconds";
+    window.timer--;
+  }
+  
+  
+  
+  window.minutes = window.timer/60;
+  window.seconds = window.timer%60
+  if(window.timer == 0){ io(); }
 }, 1000);
 
-  window.minutes = timer/60;
-  window.seconds = timer%60
+
 
 function pasteNotice(){
   alert("Please don't paste pick up lines! Naughty!");
