@@ -3,11 +3,11 @@ h1 {
   text-align: center;
 }
 
-input
+#text
 {
   -moz-border-radius: 15px;
  border-radius: 15px;
-    -ms-wrap-margin: 
+    -ms-wrap-margin:
     border:solid 1px black;
     padding:5px;
     width: 350%;
@@ -35,4 +35,5 @@ input
 #pungame {
   width: 25%;
   height: 500px;
+  display: none;
 }

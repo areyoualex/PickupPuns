@@ -1,17 +1,24 @@
 //Timer variable
 window.timer;
 
-//Start a connection to the server
+//Server connection variable
 var socket = io();
 
 //This will send the pun to the server upon the form being submitted
 //It's a JQuery block
 $(function () {
+  //Function to show game after sign-in
+  $('#signin').submit(function(e){
+    //Prevent page refresh
+    e.preventDefault();
+    document.getElementById('signin').style.display = "none";
+    document.getElementById('pungame').style.display = "block";
+  });
   //Get pun <ul> element
   var puns = document.getElementById('punlist');
 
   //Upon submitting the form
-  $('form').submit(function(e){
+  $('#puninput').submit(function(e){
     //Don't refresh the page
     e.preventDefault();
 
@@ -38,11 +45,11 @@ setInterval(()=>{
   } else if (Math.floor(window.minutes) == 0){
     document.getElementById('time').innerHTML = window.seconds + " seconds";
     window.timer--;
-  } else {  
+  } else {
     document.getElementById('time').innerHTML = Math.floor(window.minutes) + " minute " + window.seconds + " seconds";
     window.timer--;
   }
-  
+
   window.minutes = window.timer/60;
   window.seconds = window.timer%60
   if(window.timer == 0){ io(); }
