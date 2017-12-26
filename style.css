@@ -37,3 +37,7 @@ h1 {
   height: 500px;
   display: none;
 }
+
+#time {
+  float: center;
+}
