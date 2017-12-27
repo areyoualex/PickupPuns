@@ -7,6 +7,14 @@ var socket = io();
 //This will send the pun to the server upon the form being submitted
 //It's a JQuery block
 $(function () {
+  $('#createGame').click(function(){
+    $('#signin').css({"display":"block"});
+    $('#start').css({"display":"none"})
+  });
+  $('#joinGame').click(function(){
+    $('#signin').css({"display":"block"});
+    $('#start').css({"display":"none"})
+  });
   //Function to show game after sign-in
   $('#signin').submit(function(e){
     //Prevent page refresh
