@@ -18,6 +18,42 @@ h1 {
   font-weight: bold;
 }
 
+#signin {
+  display: none;
+
+  margin: auto;
+  text-align: center;
+}
+
+#prompt {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 30px
+}
+
+#prompt1 {
+  font-size: 20px
+}
+
+#Submit {
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+
+  background-color: greenyellow;
+
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 25px;
+}
+
+#answer {
+  height: 20px
+  width: 2000px
+}
+
+#rooms{
+  display: none;
+}
+
 #punlist {
   /*float: middle;
   */
@@ -36,4 +72,34 @@ h1 {
   width: 25%;
   height: 500px;
   display: none;
+}
+
+#time {
+  margin: auto;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#start{
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+}
+
+#start button {
+  margin: auto;
+  text-align: center;
+
+  height: 200px;
+  width: 200px;
+
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+
+  background-color: greenyellow;
+
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 30px;
 }

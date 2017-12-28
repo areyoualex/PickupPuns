@@ -17,10 +17,28 @@
 
       <script src="game.js"></script>
 
-      <form id="signin">
+      <div id="start">
+        <button id="createGame">Create new game</button>
+        <button id="joinGame">Join existing game</button>
+      </div>
+
+      <div id="rooms">
         <p>Enter your name:</p>
         <input type="text">
+        <ul>
+          <li>Loading rooms...</li>
+        </ul>
+      </div>
+
+      <form id="signin">
+        <p id="prompt">Enter your name:</p>
+        <input type="text" id="answer">
+        <p id="prompt">Name of game to join?</p>
+        <p id="prompt1">(make something up if creating a new game)</p>
+        <input type="text" id="answer">
+        <p><input type="submit" id="Submit"></p>
       </form>
+
       <div id="pungame">
         <ul id="punlist">
         </ul>
@@ -35,6 +53,5 @@
           <button>Pun!</button>
         </form>
       </div>
-
 	</body>
 </html>
