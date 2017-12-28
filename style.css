@@ -46,3 +46,28 @@ h1 {
   margin: auto;
   text-align: center;
 }
+
+#createGame {
+  margin: auto;
+  text-align: center;
+
+  height: 200px
+  width: 200px
+
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+#joinGame {
+  margin: auto
+  text-align: center;
+
+  height: 200px
+  width: 200px
+
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
