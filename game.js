@@ -41,9 +41,11 @@ $(function () {
     //Don't refresh the page
     e.preventDefault();
 
+    /*
     //Add the pun the user sent to the punlist
     puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" said: </p>"
       + document.getElementById('text').value + "</li>";
+    */
 
     //Scroll to the bottom of the punlist
     puns.scrollTop = puns.scrollHeight;
@@ -55,10 +57,20 @@ $(function () {
   });
 
   //Upon receiving a pun from the server
-  socket.on('pun', (name, msg)=> {
-    puns.innerHTML = puns.innerHTML + "<li> <p>"+name+" said: </p>" + msg + "</li>"
+  socket.on('pun', (username, msg)=> {
+    puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" said: </p>" + msg + "</li>"
     puns.scrollTop = puns.scrollHeight;
   });
+
+  //Upon receiving message that a user has disconnected
+  socket.on('user disconnected', (username)=>{
+    puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" has disconnected. </p> </li>"
+  })
+
+  //Upon receiving message that a new user has joined
+  socket.on('new user', (username)=>{
+    puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" has joined. </p> </li>"
+  })
 });
 
 //Handle display of timer

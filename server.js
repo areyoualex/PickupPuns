@@ -46,6 +46,7 @@ setInterval(()=>{
 io.on('connection', function(socket){
   //Console debug - leave commented out
   //console.log('a user connected');
+  var uname = "";
 
   //Variable for this sockets current room index
   var i;
@@ -58,8 +59,8 @@ io.on('connection', function(socket){
     //Output to console
     console.log('pun by '+username+': ' + msg);
 
-    //Emit to all connected clients except sender
-    socket.to(Object.keys(socket.rooms)[1]).emit('pun', username, msg);
+    //Emit to everyone in the room
+    io.in(Object.keys(socket.rooms)[1]).emit('pun', uname, msg);
   });
 
   //On receiving a join game message
@@ -67,9 +68,15 @@ io.on('connection', function(socket){
     //Join the room
     socket.join(name);
 
-    var hasRoom = false;
+    //Set username variable
+    uname = username;
+
+    //Tell everyone that the user has joined
+    io.in(name).emit('new user', username);
 
     //Find room; if it doesn't exist yet, add it
+    var hasRoom = false;
+
     rooms.find((element)=>{
       if (element == name) hasRoom = true;
     });
@@ -85,6 +92,21 @@ io.on('connection', function(socket){
     console.log(Object.keys(socket.rooms));
     */
   });
+
+  //On the socket disconnecting
+  socket.on('disconnecting', function(reason){
+    var room = Object.keys(socket.rooms)[1];
+    io.in(room).clients((error, clients)=>{
+      //If this is the last person in the room, remove the room from the list
+      if (clients.length == 1)
+        rooms.find((element, index)=>{
+          if (element == room) rooms.splice(index, 1);
+        });
+    });
+    //Send a disconnect message
+    socket.to(room).emit('user disconnected', uname);
+  });
+
 });
 
 setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
