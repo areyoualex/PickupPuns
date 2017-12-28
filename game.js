@@ -101,11 +101,13 @@ $(function () {
   //Upon receiving message that a user has disconnected
   socket.on('user disconnected', (username)=>{
     puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" has disconnected. </p> </li>"
+    puns.scrollTop = puns.scrollHeight;
   })
 
   //Upon receiving message that a new user has joined
   socket.on('new user', (username)=>{
     puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" has joined. </p> </li>"
+    puns.scrollTop = puns.scrollHeight;
   })
 });
 
