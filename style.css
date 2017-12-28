@@ -30,6 +30,21 @@ h1 {
   font-size: 30px
 }
 
+#prompt1 {
+  font-size: 20px
+}
+
+#Submit {
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+
+  background-color: greenyellow;
+
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 25px;
+}
+
 #answer {
   height: 20px
   width: 2000px
