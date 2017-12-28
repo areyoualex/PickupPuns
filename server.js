@@ -29,6 +29,9 @@ http.listen(PORT, ()=> {
 //socketIO stuff
 const io = socketIO(http);
 
+//Array of rooms
+var rooms = [];
+
 //Create timer
 var timer = 180;
 setInterval(()=>{
@@ -64,6 +67,15 @@ io.on('connection', function(socket){
     //Join the room
     socket.join(name);
 
+    var hasRoom = false;
+
+    //Find room; if it doesn't exist yet, add it
+    rooms.find((element)=>{
+      if (element == name) hasRoom = true;
+    });
+    if(!hasRoom) rooms.push(name);
+
+    /*
     //Debug output
     console.log(name);
     console.log("joined by " + username);
@@ -71,6 +83,7 @@ io.on('connection', function(socket){
       console.log(clients);
     });
     console.log(Object.keys(socket.rooms));
+    */
   });
 });
 

@@ -45,29 +45,24 @@ h1 {
 #time {
   margin: auto;
   text-align: center;
+  margin-bottom: 20px;
 }
 
-#createGame {
+#start{
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+}
+
+#start button {
   margin: auto;
   text-align: center;
 
-  height: 200px
-  width: 200px
+  height: 200px;
+  width: 200px;
 
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-
-#joinGame {
-  margin: auto
-  text-align: center;
-
-  height: 200px
-  width: 200px
-
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-}
-
