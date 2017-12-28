@@ -10,14 +10,33 @@ var username;
 //This will send the pun to the server upon the form being submitted
 //It's a JQuery block
 $(function () {
+  //Creating new game
   $('#createGame').click(function(){
     $('#signin').css({"display":"block"});
     $('#start').css({"display":"none"})
   });
+
+  //Joining existing game
   $('#joinGame').click(function(){
-    $('#signin').css({"display":"block"});
+    //Ask for rooms list
+    socket.emit('rooms');
+    $('#rooms').css({"display":"block"});
     $('#start').css({"display":"none"})
   });
+
+  //Upon a room button being clicked
+  $('#rooms').delegate(".room", "click", function(){
+    var username = $('#rooms > input').val();
+    if (username == "")
+      alert("Please enter a username.");
+    else {
+      socket.emit('join game', $(this).html(), username);
+      //Show game and hide rooms list
+      $('#pungame').css({"display":"block"});
+      $('#rooms').css({"display":"none"});
+    }
+  });
+
   //Function to show game after sign-in
   $('#signin').submit(function(e){
     //Prevent page refresh
@@ -60,6 +79,18 @@ $(function () {
   socket.on('pun', (username, msg)=> {
     puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" said: </p>" + msg + "</li>"
     puns.scrollTop = puns.scrollHeight;
+  });
+
+  //Upon receiving the rooms list
+  socket.on('rooms', (rooms)=>{
+    //Update list
+    $('#rooms > ul').html(()=>{
+      var ret = "";
+      rooms.forEach((room)=>{
+        ret = ret + "<li> <button class='room'>" + room + "</button> </li>";
+      });
+      return ret;
+    });
   });
 
   //Upon receiving message that a user has disconnected

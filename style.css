@@ -50,6 +50,10 @@ h1 {
   width: 2000px
 }
 
+#rooms{
+  display: none;
+}
+
 #punlist {
   /*float: middle;
   */
@@ -79,7 +83,7 @@ h1 {
 #start{
   display: flex;
   align-items: center;
-  width: 50%;
+  width: 80%;
   margin: auto;
 }
 

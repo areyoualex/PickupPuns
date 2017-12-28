@@ -54,7 +54,12 @@ io.on('connection', function(socket){
   //Give time on connect
   socket.emit('timer', timer);
 
-  //What to do upon receiving a pun
+  //Upon a request for the room list
+  socket.on('rooms', function(){
+    socket.emit('rooms', rooms);
+  });
+
+  //Upon receiving a pun
   socket.on('pun', function(username, msg){
     //Output to console
     console.log('pun by '+username+': ' + msg);
@@ -63,7 +68,7 @@ io.on('connection', function(socket){
     io.in(Object.keys(socket.rooms)[1]).emit('pun', uname, msg);
   });
 
-  //On receiving a join game message
+  //Upon a new user joining the game
   socket.on('join game', function(name, username){
     //Join the room
     socket.join(name);
@@ -81,6 +86,9 @@ io.on('connection', function(socket){
       if (element == name) hasRoom = true;
     });
     if(!hasRoom) rooms.push(name);
+
+    //Emit rooms list
+    io.emit('rooms', rooms);
 
     /*
     //Debug output
@@ -103,8 +111,12 @@ io.on('connection', function(socket){
           if (element == room) rooms.splice(index, 1);
         });
     });
+    
     //Send a disconnect message
     socket.to(room).emit('user disconnected', uname);
+
+    //Update rooms list for connected clients
+    io.emit('rooms', rooms);
   });
 
 });
