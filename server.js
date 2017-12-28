@@ -39,9 +39,6 @@ setInterval(()=>{
   }
 }, 1000);
 
-//Create rooms array
-var rooms = [];
-
 //Start the socket connection
 io.on('connection', function(socket){
   //Console debug - leave commented out
@@ -54,39 +51,26 @@ io.on('connection', function(socket){
   socket.emit('timer', timer);
 
   //What to do upon receiving a pun
-  socket.on('pun', function(msg){
+  socket.on('pun', function(username, msg){
     //Output to console
-    console.log('pun: ' + msg);
+    console.log('pun by '+username+': ' + msg);
 
     //Emit to all connected clients except sender
-    io.to(rooms[i]).emit('pun', msg);
+    socket.to(Object.keys(socket.rooms)[1]).emit('pun', username, msg);
   });
 
   //On receiving a join game message
   socket.on('join game', function(name, username){
+    //Join the room
     socket.join(name);
-
-    //Loop through rooms and find room
-    var hasRoom = false;
-    for(i = 0; i < rooms.length; i++){
-      if (rooms[i].name == name){
-        hasRoom = true;
-        break;
-      }
-    }
-
-    //If rooms doesn't have this room, add it to rooms
-    if(hasRoom == false){
-      rooms[rooms.length] = { name: name, users: [] };
-    }
-
-    //Add this user to room users
-    rooms[i].users[rooms[i].users.length] = socket.id;
 
     //Debug output
     console.log(name);
-    console.log(rooms[i]);
     console.log("joined by " + username);
+    io.in(name).clients((error, clients)=>{
+      console.log(clients);
+    });
+    console.log(Object.keys(socket.rooms));
   });
 });
 

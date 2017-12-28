@@ -4,6 +4,9 @@ window.timer;
 //Server connection variable
 var socket = io();
 
+//Username variable
+var username;
+
 //This will send the pun to the server upon the form being submitted
 //It's a JQuery block
 $(function () {
@@ -23,8 +26,11 @@ $(function () {
     //Make pungame visible
     document.getElementById('signin').style.display = "none";
     document.getElementById('pungame').style.display = "block";
+
+    //Send username and room to server
     var elements = document.getElementById('signin').getElementsByTagName('input');
     socket.emit('join game', elements[1].value, elements[0].value);
+    username = elements[0].value;
   });
 
   //Get pun <ul> element
@@ -36,16 +42,22 @@ $(function () {
     e.preventDefault();
 
     //Add the pun the user sent to the punlist
-    puns.innerHTML = puns.innerHTML + "<li> <p>You said: </p>"
+    puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" said: </p>"
       + document.getElementById('text').value + "</li>";
 
     //Scroll to the bottom of the punlist
     puns.scrollTop = puns.scrollHeight;
 
     //Send the pun to the server
-    socket.emit('pun', $('#text').val());
+    socket.emit('pun', username, $('#text').val());
     $('#text').val('');
     return false;
+  });
+
+  //Upon receiving a pun from the server
+  socket.on('pun', (name, msg)=> {
+    puns.innerHTML = puns.innerHTML + "<li> <p>"+name+" said: </p>" + msg + "</li>"
+    puns.scrollTop = puns.scrollHeight;
   });
 });
 
@@ -71,12 +83,6 @@ setInterval(()=>{
 
 //Upon receiving the time
 socket.on('timer', (t)=> { timer = t; });
-
-//Upon receiving a pun from the server
-socket.on('pun', (msg)=> {
-  puns.innerHTML = puns.innerHTML + "<li> <p>They said: </p>" + msg + "</li>"
-  puns.scrollTop = puns.scrollHeight;
-});
 
 //Alert user if they try to copy-paste a pun
 function pasteNotice(){
