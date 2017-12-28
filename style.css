@@ -18,8 +18,21 @@ h1 {
   font-weight: bold;
 }
 
-#signin{
+#signin {
   display: none;
+
+  margin: auto;
+  text-align: center;
+}
+
+#prompt {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 30px
+}
+
+#answer {
+  height: 20px
+  width: 2000px
 }
 
 #punlist {
@@ -62,7 +75,12 @@ h1 {
   height: 200px;
   width: 200px;
 
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+
+  background-color: greenyellow;
+
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 30px;
 }
