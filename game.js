@@ -12,7 +12,7 @@ var username;
 $(function () {
   //Creating new game
   $('#createGame').click(function(){
-    $('#signin').css({"display":"block"});
+    $('#signinCreate').css({"display":"block"});
     $('#start').css({"display":"none"})
   });
 
@@ -20,10 +20,15 @@ $(function () {
   $('#joinGame').click(function(){
     //Ask for rooms list
     socket.emit('rooms');
-    $('#rooms').css({"display":"block"});
-    $('#start').css({"display":"none"})
+    $('#start').css({"display":"none"});
+    $('#signinJoin').css({"display":"block"});
+    //When enter is clicked, inputs are removed and 'Loading game' appears
+    $('#Submit1').click(function(){
+      $('#signinJoin').css({"display":"none"});
+      $('.rooms').css({"display":"block"});
+    });
   });
-
+  
   //Upon a room button being clicked
   $('#rooms').delegate(".room", "click", function(){
     var username = $('#rooms > input').val();
