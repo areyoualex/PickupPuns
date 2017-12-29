@@ -109,24 +109,31 @@ $(function () {
   })
 });
 
+
+
+
 //Handle display of timer
 setInterval(()=>{
   //Display time on website
-  if(Math.floor(window.minutes) != 1 && Math.floor(window.minutes) != 0){
-    document.getElementById('time').innerHTML = Math.floor(window.minutes) + " minutes " + window.seconds + " seconds";
+  if(window.minutes != 1 && window.minutes != 0 && typeof window.minutes !== 'undefined' && typeof window.seconds !== 'undefined'){
+    //regular print with >1 minutes
+    document.getElementById('time').innerHTML = window.minutes + " minutes " + window.seconds + " seconds";
     window.timer--;
-  } else if (Math.floor(window.minutes) == 0){
+  } else if (window.minutes == 0 && typeof window.minutes !== 'undefined' && typeof window.seconds !== 'undefined'){
+    //printing with no minutes
     document.getElementById('time').innerHTML = window.seconds + " seconds";
     window.timer--;
-  } else {
-    document.getElementById('time').innerHTML = Math.floor(window.minutes) + " minute " + window.seconds + " seconds";
+  } else if (window.minutes == 1 && typeof window.minutes !== 'undefined' && typeof window.seconds !== 'undefined'){
+    //printing with 1 minute
+    document.getElementById('time').innerHTML = window.minutes + " minute " + window.seconds + " seconds";
     window.timer--;
   }
 
-  window.minutes = window.timer/60;
+  window.minutes = Math.floor(window.timer/60);
   window.seconds = window.timer%60
   if(window.timer == 0){ io(); }
 }, 1000);
+
 
 
 //Upon receiving the time
