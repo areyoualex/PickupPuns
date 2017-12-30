@@ -17,14 +17,10 @@
 
 #text {
   display: flex;
-  -moz-border-radius: 15px;
-  -webkit-border-radius: 15px;
   border-radius: 15px;
-    -ms-wrap-margin:
-    border: solid 1px black;
-    padding: 5px;
-    width: 90vw;
-    height: 15px;
+  border: solid 1px black;
+  padding: 5px;
+  width: 90px;
 }
 
 
@@ -98,6 +94,8 @@
   width: 100%;
   height: 60%;
   overflow-y: scroll;
+  word-wrap: break-word;
+  word-break: break-all;
   margin:auto
 }
 

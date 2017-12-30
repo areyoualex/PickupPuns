@@ -32,7 +32,7 @@ $(function () {
     //Clear the message list
     $('#punlist').html("");
     //Show the start screen
-    
+
     $('#pungame').css({"display":"none"});
     $('#start').css({"display":"flex"});
   });
@@ -66,7 +66,16 @@ $(function () {
   });
 
   //Get pun <ul> element
-  var puns = document.getElementById('punlist');
+  var puns = $('#punlist');
+
+  //Textarea submitting
+  $("#text").keypress(function (e) {
+    if(e.which == 13 && !e.shiftKey) {        
+        $(this).closest("form").submit();
+        e.preventDefault();
+        return false;
+    }
+  });
 
   //Upon sending a pun
   $('#puninput').submit(function(e){
@@ -80,7 +89,7 @@ $(function () {
     */
 
     //Scroll to the bottom of the punlist
-    puns.scrollTop = puns.scrollHeight;
+    puns.scrollTop(puns.prop('scrollHeight'));
 
     //Send the pun to the server
     socket.emit('pun', $('#text').val());
@@ -90,8 +99,8 @@ $(function () {
 
   //Upon receiving a pun from the server
   socket.on('pun', (username, msg)=> {
-    puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" said: </p>" + msg + "</li>"
-    puns.scrollTop = puns.scrollHeight;
+    puns.html(puns.html() + "<li> <p>"+username+" said: </p>" + msg + "</li>");
+    puns.scrollTop(puns.prop('scrollHeight'));
   });
 
   //Upon receiving the rooms list
@@ -112,54 +121,22 @@ $(function () {
 
   //Upon receiving message that a user has disconnected
   socket.on('user disconnected', (username)=>{
-    puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" has disconnected. </p> </li>"
-    puns.scrollTop = puns.scrollHeight;
+    puns.html(puns.html() + "<li> <p>"+username+" has disconnected. </p> </li>");
+    puns.scrollTop(puns.prop('scrollHeight'));
   });
 
   //Upon receiving message that a user has left
   socket.on('leave game', (username)=>{
-    puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" has left the game. </p> </li>"
-    puns.scrollTop = puns.scrollHeight;
+    puns.html(puns.html() + "<li> <p>"+username+" has left the game. </p> </li>");
+    puns.scrollTop(puns.prop('scrollHeight'));
   });
 
   //Upon receiving message that a new user has joined
   socket.on('new user', (username)=>{
-    puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" has joined. </p> </li>"
-    puns.scrollTop = puns.scrollHeight;
+    puns.html(puns.html() + "<li> <p>"+username+" has joined. </p> </li>");
+    puns.scrollTop(puns.prop('scrollHeight'));
   });
 });
-
-
-
-
-//Handle display of timer
-/*
-setInterval(()=>{
-  //Display time on website
-  if(window.minutes != 1 && window.minutes != 0 && window.minutes >=0 && typeof window.minutes !== 'undefined' && window.seconds >= 0 && typeof window.seconds !== 'undefined'){
-    //regular print with >1 minutes
-    document.getElementById('time').innerHTML = window.minutes + " minutes " + window.seconds + " seconds";
-    window.timer--;
-  } else if (window.minutes == 0 && typeof window.minutes !== 'undefined' && window.seconds >= 0 && typeof window.seconds !== 'undefined'){
-    //printing with no minutes
-    document.getElementById('time').innerHTML = window.seconds + " seconds";
-    window.timer--;
-  } else if (window.minutes == 1 && window.minutes >=0 && typeof window.minutes !== 'undefined' && window.seconds >= 0 && typeof window.seconds !== 'undefined'){
-    //printing with 1 minute
-    document.getElementById('time').innerHTML = window.minutes + " minute " + window.seconds + " seconds";
-    window.timer--;
-  }
-
-  window.minutes = Math.floor(window.timer/60);
-  window.seconds = window.timer%60
-  if(window.timer == 0){ io(); }
-}, 1000);
-
-
-
-//Upon receiving the time
-socket.on('timer', (t)=> { timer = t; });
-*/
 
 //Alert user if they try to copy-paste a pun
 function pasteNotice(){

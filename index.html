@@ -50,11 +50,9 @@
 
         <form action="#" id="puninput">
           <br>
-          <div contenteditable="true">
-            <input spellcheck="true" type="text" id="text" contenteditable="true" name="text_name"
-            onCopy="return false" onDrag="return false" onDrop="return false"
-            onPaste="pasteNotice(); return false"/>
-          </div>
+          <textarea spellcheck="true" required="true" id="text" name="text_name"
+          onCopy="return false" onDrag="return false" onDrop="return false"
+          onPaste="pasteNotice(); return false"></textarea>
           <br>
           <br>
           <button id="Submit">Pun!</button>
