@@ -8,11 +8,11 @@ var socket = io();
 var username;
 
 //This will send the pun to the server upon the form being submitted
-//It's a JQuery block
+//It's a JQueryblock
 $(function () {
   //Creating new game
   $('#createGame').click(function(){
-    $('#signinCreate').css({"display":"block"});
+    $('#signin').css({"display":"block"});
     $('#start').css({"display":"none"})
   });
 
@@ -21,12 +21,7 @@ $(function () {
     //Ask for rooms list
     socket.emit('rooms');
     $('#start').css({"display":"none"});
-    $('#signinJoin').css({"display":"block"});
-    //When enter is clicked, inputs are removed and 'Loading game' appears
-    $('#Submit1').click(function(){
-      $('#signinJoin').css({"display":"none"});
-      $('.rooms').css({"display":"block"});
-    });
+    $('#rooms').css({"display":"block"});
   });
 
   //Leaving current game
@@ -35,7 +30,7 @@ $(function () {
     socket.emit('leave game');
     //Show the start screen
     $('#pungame').css({"display":"none"});
-    $('#start').css({"display":"block"});
+    $('#start').css({"display":"flex"});
   });
 
   //Upon a room button being clicked
@@ -97,16 +92,18 @@ $(function () {
 
   //Upon receiving the rooms list
   socket.on('rooms', (rooms)=>{
-    var roomHTML = "";
+    var roomHTML = "<input type='text'>";
+    $('#rooms').html("");
     rooms.forEach((room)=>{
-      roomHTML = roomHTML + "<li> <button class='room'>" + room + "</button> </li>";
+      roomHTML = roomHTML + "<p> <button class='room'>" + room + "</button> </p>";
     });
+
     //Update list
-    $('#rooms > ul').html(roomHTML);
+    $('#rooms').html(roomHTML);
 
     //Clear rooms list if empty
     if (rooms.length == 0)
-      $('#rooms > ul').html("");
+      $('#rooms').html("");
   });
 
   //Upon receiving message that a user has disconnected
@@ -132,6 +129,7 @@ $(function () {
 
 
 //Handle display of timer
+/*
 setInterval(()=>{
   //Display time on website
   if(window.minutes != 1 && window.minutes != 0 && window.minutes >=0 && typeof window.minutes !== 'undefined' && window.seconds >= 0 && typeof window.seconds !== 'undefined'){
@@ -157,6 +155,7 @@ setInterval(()=>{
 
 //Upon receiving the time
 socket.on('timer', (t)=> { timer = t; });
+*/
 
 //Alert user if they try to copy-paste a pun
 function pasteNotice(){
