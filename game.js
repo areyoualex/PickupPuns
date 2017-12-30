@@ -134,15 +134,15 @@ $(function () {
 //Handle display of timer
 setInterval(()=>{
   //Display time on website
-  if(window.minutes != 1 && window.minutes != 0 && typeof window.minutes !== 'undefined' && typeof window.seconds !== 'undefined'){
+  if(window.minutes != 1 && window.minutes != 0 && window.minutes >=0 && typeof window.minutes !== 'undefined' && window.seconds >= 0 && typeof window.seconds !== 'undefined'){
     //regular print with >1 minutes
     document.getElementById('time').innerHTML = window.minutes + " minutes " + window.seconds + " seconds";
     window.timer--;
-  } else if (window.minutes == 0 && typeof window.minutes !== 'undefined' && typeof window.seconds !== 'undefined'){
+  } else if (window.minutes == 0 && typeof window.minutes !== 'undefined' && window.seconds >= 0 && typeof window.seconds !== 'undefined'){
     //printing with no minutes
     document.getElementById('time').innerHTML = window.seconds + " seconds";
     window.timer--;
-  } else if (window.minutes == 1 && typeof window.minutes !== 'undefined' && typeof window.seconds !== 'undefined'){
+  } else if (window.minutes == 1 && window.minutes >=0 && typeof window.minutes !== 'undefined' && window.seconds >= 0 && typeof window.seconds !== 'undefined'){
     //printing with 1 minute
     document.getElementById('time').innerHTML = window.minutes + " minute " + window.seconds + " seconds";
     window.timer--;

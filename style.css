@@ -1,12 +1,14 @@
 h1 {
   font-family: Poppins, sans-serif;
   text-align: center;
+  font-size: 200%;
 }
 
 #text
 {
   -moz-border-radius: 15px;
- border-radius: 15px;
+  -webkit-border-radius: 15px;  
+  border-radius: 15px;
     -ms-wrap-margin:
     border:solid 1px black;
     padding:5px;
@@ -34,11 +36,7 @@ h1 {
 
 #prompt {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 30px
-}
-
-#prompt1 {
-  font-size: 20px
+  font-size: 160%
 }
 
 #Submit {
@@ -49,7 +47,7 @@ h1 {
   background-color: greenyellow;
 
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 25px;
+  font-size: 150%;
 }
 
 #Submit1 {
@@ -60,7 +58,7 @@ h1 {
   background-color: greenyellow;
 
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 25px;
+  font-size: 150%;
 }
 
 #answer {
@@ -99,28 +97,61 @@ h1 {
   margin-bottom: 20px;
 }
 
-#start {
-  display: flex;
-  align-items: center;
-  width: 80%;
-  margin: auto;
+@media screen and (min-width: 1024px) {
+  #start {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    margin: auto;
+  }
 }
 
-#start button {
-  margin: auto;
-  text-align: center;
+@media screen and (max-width: 1024px) {
+  #start {
+      display: flex;
+      align-items: center;
+      margin: auto;
+      width: 85vw;
+      height: 30vh;
+  }
+}
 
-  height: 200px;
-  width: 200px;
+@media screen and (max-width: 1024px) {
+  #start button {
+    margin: auto;
+    text-align: center;
 
-  -moz-border-radius: 16px;
-  -webkit-border-radius: 16px;
-  border-radius: 16px;
+    height: 90px;
+    width: 90%;
 
-  background-color: greenyellow;
+    -moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+    border-radius: 16px;
 
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 30px;
+    background-color: greenyellow;
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 120%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #start button {
+    margin: auto;
+    text-align: center;
+
+    height: 90px;
+    width: 90%;
+
+    -moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+    border-radius: 16px;
+
+    background-color: greenyellow;
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 160%;
+  }
 }
 
 #buffer {
