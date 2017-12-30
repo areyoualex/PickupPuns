@@ -14,16 +14,19 @@
   }
 }
 
+
 #text {
+  display: flex;
   -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
   border-radius: 15px;
     -ms-wrap-margin:
-    border:solid 1px black;
-    padding:5px;
-    width: 350%;
+    border: solid 1px black;
+    padding: 5px;
+    width: 90vw;
     height: 15px;
 }
+
 
 #punlist li p {
   font-weight: bold;
@@ -34,6 +37,9 @@
 
   margin: auto;
   text-align: center;
+
+  width: 95vw;
+  height: 30vh;
 }
 
 @media screen and (min-width: 1024px) {
@@ -59,7 +65,7 @@
     background-color: greenyellow;
 
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 210%;
+    font-size: 150%;
   }
 }
 
@@ -76,35 +82,9 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
-  #Submit1 {
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    border-radius: 8px;
-
-    background-color: greenyellow;
-
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 210%;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  #Submit1 {
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    border-radius: 8px;
-
-    background-color: greenyellow;
-
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 110%;
-  }
-}
-
 .answer {
   height: 15px;
-  width: 2000px
+  width: 200px
 }
 
 #rooms{
@@ -122,7 +102,7 @@
 }
 
 #puninput {
-  float: left;
+  float: center;
   vertical-align: bottom;
 }
 
