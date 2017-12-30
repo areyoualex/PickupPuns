@@ -8,7 +8,14 @@
     <link rel="stylesheet" href="style.css" type="text/css">
   </head>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="resources/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script>
+    //Fallback to local JQuery if CDN isn't working
+    if (typeof jQuery == 'undefined') {
+      document.write(unescape(
+        "%3Cscript src='resources/jquery-3.2.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+    }
+  </script>
     <body>
       </script src="https://cdn.rawgit.com/downloads/uxebu/bonsai/bonsai-0.4.1.min.js">
 
@@ -47,7 +54,7 @@
       </form>
 
       <div id="pungame">
-        <button>Leave game</button>
+        <button id="leave">Leave game</button>
         <ul id="punlist">
         </ul>
 

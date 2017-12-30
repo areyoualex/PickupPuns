@@ -28,7 +28,16 @@ $(function () {
       $('.rooms').css({"display":"block"});
     });
   });
-  
+
+  //Leaving current game
+  $('#leave').click(function(){
+    //Tell server to leave the room
+    socket.emit('leave game');
+    //Show the start screen
+    $('#pungame').css({"display":"none"});
+    $('#start').css({"display":"block"});
+  });
+
   //Upon a room button being clicked
   $('#rooms').delegate(".room", "click", function(){
     var username = $('#rooms > input').val();
@@ -60,7 +69,7 @@ $(function () {
   //Get pun <ul> element
   var puns = document.getElementById('punlist');
 
-  //Upon submitting the form
+  //Upon sending a pun
   $('#puninput').submit(function(e){
     //Don't refresh the page
     e.preventDefault();
@@ -75,7 +84,7 @@ $(function () {
     puns.scrollTop = puns.scrollHeight;
 
     //Send the pun to the server
-    socket.emit('pun', username, $('#text').val());
+    socket.emit('pun', $('#text').val());
     $('#text').val('');
     return false;
   });
@@ -88,27 +97,35 @@ $(function () {
 
   //Upon receiving the rooms list
   socket.on('rooms', (rooms)=>{
-    //Update list
-    $('#rooms > ul').html(()=>{
-      var ret = "";
-      rooms.forEach((room)=>{
-        ret = ret + "<li> <button class='room'>" + room + "</button> </li>";
-      });
-      return ret;
+    var roomHTML = "";
+    rooms.forEach((room)=>{
+      roomHTML = roomHTML + "<li> <button class='room'>" + room + "</button> </li>";
     });
+    //Update list
+    $('#rooms > ul').html(roomHTML);
+
+    //Clear rooms list if empty
+    if (rooms.length == 0)
+      $('#rooms > ul').html("");
   });
 
   //Upon receiving message that a user has disconnected
   socket.on('user disconnected', (username)=>{
     puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" has disconnected. </p> </li>"
     puns.scrollTop = puns.scrollHeight;
-  })
+  });
+
+  //Upon receiving message that a user has left
+  socket.on('leave game', (username)=>{
+    puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" has left the game. </p> </li>"
+    puns.scrollTop = puns.scrollHeight;
+  });
 
   //Upon receiving message that a new user has joined
   socket.on('new user', (username)=>{
     puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" has joined. </p> </li>"
     puns.scrollTop = puns.scrollHeight;
-  })
+  });
 });
 
 
