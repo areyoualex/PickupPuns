@@ -16,7 +16,7 @@
 
 #text {
   -moz-border-radius: 15px;
-  -webkit-border-radius: 15px;  
+  -webkit-border-radius: 15px;
   border-radius: 15px;
     -ms-wrap-margin:
     border:solid 1px black;
@@ -29,14 +29,7 @@
   font-weight: bold;
 }
 
-#signinCreate {
-  display: none;
-
-  margin: auto;
-  text-align: center;
-}
-
-#signinJoin {
+#signin{
   display: none;
 
   margin: auto;
@@ -44,14 +37,14 @@
 }
 
 @media screen and (min-width: 1024px) {
-  #prompt {
+  .prompt {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 185%
   }
 }
 
 @media screen and (max-width: 1024px) {
-  #prompt {
+  .prompt {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 85%
   }
@@ -109,8 +102,8 @@
   }
 }
 
-#answer {
-  height: 15px
+.answer {
+  height: 15px;
   width: 2000px
 }
 
