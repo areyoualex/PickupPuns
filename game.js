@@ -92,7 +92,7 @@ $(function () {
 
   //Upon receiving the rooms list
   socket.on('rooms', (rooms)=>{
-    var roomHTML = "<input type='text'>";
+    var roomHTML = "<p>Enter your name:</p><input type='text'>";
     $('#rooms').html("");
     rooms.forEach((room)=>{
       roomHTML = roomHTML + "<p> <button class='room'>" + room + "</button> </p>";
@@ -103,7 +103,7 @@ $(function () {
 
     //Clear rooms list if empty
     if (rooms.length == 0)
-      $('#rooms').html("");
+      $('#rooms').html("<p>No one's playing right now... Make a new game!</p>");
   });
 
   //Upon receiving message that a user has disconnected
