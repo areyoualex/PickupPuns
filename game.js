@@ -28,6 +28,8 @@ $(function () {
   $('#leave').click(function(){
     //Tell server to leave the room
     socket.emit('leave game');
+    //Clear the message list
+    $('#punlist').html("");
     //Show the start screen
     $('#pungame').css({"display":"none"});
     $('#start').css({"display":"flex"});
