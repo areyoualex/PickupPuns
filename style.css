@@ -145,9 +145,8 @@
 #punlist {
   /*float: middle;
   */
-  width: 100%;
+  width: 85%;
   height: 60%;
-  padding: 0px;
   overflow-y: scroll;
   word-wrap: break-word;
   word-break: break-all;
