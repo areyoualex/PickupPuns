@@ -2,15 +2,15 @@
   h1 {
     font-family: Poppins, sans-serif;
     text-align: center;
-    font-size: 400%;
+    font-size: 350%;
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
   h1 {
     font-family: Poppins, sans-serif;
     text-align: center;
-    font-size: 165%;
+    font-size: 220%;
   }
 }
 
@@ -22,8 +22,9 @@
   padding: 5px;
   width: 90%;
   margin: auto;
-}
 
+  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+}
 
 #punlist li p {
   font-weight: bold;
@@ -31,9 +32,10 @@
 
 #signin{
   display: none;
-
+  float: center;
   margin: auto;
   text-align: center;
+  align-items: center;
 
   width: 95vw;
   height: 30vh;
@@ -46,10 +48,10 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
   .prompt {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 85%
+    font-size: 100%
   }
 }
 
@@ -59,35 +61,80 @@
     -webkit-border-radius: 8px;
     border-radius: 8px;
     margin: auto;
-    width: 40%;
+    width: 7%;
     display: block;
 
     background-color: greenyellow;
 
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 150%;
+    text-align: center;
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
   #Submit {
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     border-radius: 8px;
     margin: auto;
-    width: 40%;
+    width: 20%;
     display: block;
 
     background-color: greenyellow;
 
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 110%;
+    text-align: center;
   }
 }
 
-.answer {
-  height: 15px;
-  width: 200px
+@media screen and (min-width: 1024px) {
+  #Submit1 {
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    margin: auto;
+    width: 9%;
+    display: block;
+
+    background-color: greenyellow;
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 150%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  #Submit1 {
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    margin: auto;
+    width: 23%;
+    display: block;
+
+    background-color: greenyellow;
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 110%;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .answer {
+    height: 5vh;
+    width: 85vw;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .answer {
+    height: 3vh;
+    width: 78vw;
+  }
 }
 
 #rooms{
@@ -134,7 +181,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
   #start {
       display: flex;
       align-items: center;
@@ -144,7 +191,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
   #start button {
     margin: auto;
     text-align: center;

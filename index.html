@@ -16,9 +16,9 @@
         "%3Cscript src='resources/jquery-3.2.1.min.js' type='text/javascript'%3E%3C/script%3E"));
     }
   </script>
-    <body>
+    <body style="background-color: #ff6347">
       </script src="https://cdn.rawgit.com/downloads/uxebu/bonsai/bonsai-0.4.1.min.js">
-
+      <br>
       <h1>Pickup Puns!</h1>
       <!-- <h2 id="time"></h2> -->
 
@@ -38,9 +38,10 @@
 
       <form id="signin">
         <p class="prompt">Enter your name:</p>
-        <input type="text" required="true" class="answer">
+        <input type="text" class="answer" autocomplete="off" required>
+        <br>
         <p class="prompt">Game name:</p>
-        <input type="text" required="true" class="answer">
+        <input type="text" class="answer" autocomplete="off" required>
         </br>
         <p><input type="submit" id="Submit" value="Enter"></p>
       </form>
@@ -53,11 +54,11 @@
 
         <form action="#" id="puninput">
           <br>
-          <textarea spellcheck="true" required="true" id="text" name="text_name"
+          <textarea spellcheck="true" required="true" autocomplete="off" id="text" name="text_name"
           onCopy="return false" onDrag="return false" onDrop="return false"
           onPaste="alert('Please don\'t paste pick up lines! Naughty!'); return false"></textarea>
           <br>
-          <button id="Submit">Pun!</button>
+          <button id="Submit1">Pun!</button>
         </form>
       </div>
 	</body>
