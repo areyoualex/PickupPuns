@@ -1,33 +1,27 @@
 //Variables/aliases for interacting with the game
 var game = {};
-var game.socket = io(); //Server connection variable
-var game.timer, game.username;
-
-//Aliases for the document
-var views = {};
-var views.signIn = $('#signIn');
-var views.start = $('#start');
-var views.rooms = $('#rooms');
-var views.game = $('#pungame');
-var views.puns = $('#punlist');
-var views.game.input = $('#puninput');
+var socket = io(); //Server connection variable
+game.timer, game.username;
 
 
 //Functions for interacting with the game
-var game.leave = function(){
+game.leave = function(){
+  //Leave game
   game.username = '';
-  views.puns.empty(); //Clear the message list
+  $('#punlist').empty(); //Clear the message list
   socket.emit('leave game');
 }, game.join = function(username, room){
+  //Join game
   game.username = username;
   socket.emit('join game', room, username);
 }, game.sendPun = function(){
-  //Send the pun to the server
+  //Send pun to the server
   socket.emit('pun', $('#puninput textarea').val());
   $('#text').val('');
 }, game.show = function(message){
-  views.puns.append("<li>"+message+"</li>");
-  views.puns.scrollTop(views.game.list.prop('scrollHeight'));
+  //Show message in list
+  $('#punlist').append("<li>"+message+"</li>");
+  $('#punlist').scrollTop($('#punlist').prop('scrollHeight'));
 }
 
 
@@ -35,14 +29,17 @@ var game.leave = function(){
 
 //Switch currently visible view
 function switchView(hideBlock, showBlock){
-  showBlock.show();
-  hideBlock.hide();
+  $("#"+showBlock).show();
+  $("#"+hideBlock).hide();
 }
-//Textarea submitting snippet
-$("#text").keypress(function (e) {
-  if(e.which == 13 && !e.shiftKey) {
-      $(this).closest("form").submit();
-      e.preventDefault();
-      return false;
-  }
+
+$(function(){
+  //Textarea submitting snippet
+  $("#text").keypress(function (e) {
+    if(e.which == 13 && !e.shiftKey) {
+        $(this).closest("form").submit();
+        e.preventDefault();
+        return false;
+    }
+  });
 });
