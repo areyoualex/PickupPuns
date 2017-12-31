@@ -30,6 +30,8 @@ http.listen(PORT, ()=> {
 const io = socketIO(http);
 
 var rooms = []; //Array of rooms
+var roomUsers = [] //Array of userlists
+var roomStates = [] //Array of states of each room
 var timers = []; //Array of timers
 
 //Create timer
@@ -37,7 +39,9 @@ setInterval(()=>{
   for(var i = 0; i<rooms.length; i++){
     if (timers[i] > 0) timers[i]--;
     else {
-      timers[i] = 180;
+      timers[i] = (roomStates[i] == 'punning') ? 60 : 180;
+      roomStates[i] = (roomStates[i] == 'punning') ? 'judging' : 'punning';
+      io.in(rooms[i]).emit('state', roomStates[i]);
       io.in(rooms[i]).emit('timer', timers[i]);
     }
   }
@@ -49,6 +53,7 @@ io.on('connection', function(socket){
   //console.log('a user connected');
   var uname = "";
   var uroom = "";
+  var roomIndex = null;
 
   //Upon a request for the room list
   socket.on('rooms', function(){
@@ -57,8 +62,9 @@ io.on('connection', function(socket){
 
   //Upon receiving a pun
   socket.on('pun', function(msg){
-    //Emit to everyone in the room
-    io.in(uroom).emit('pun', uname, msg);
+    if(roomStates[roomIndex] == 'punning')
+      //Emit to everyone in the room
+      io.in(uroom).emit('pun', uname, msg);
   });
 
   //Upon a new user joining the game
@@ -79,38 +85,52 @@ io.on('connection', function(socket){
       if (element == name) hasRoom = true;
     });
     if(!hasRoom) {
+      roomUsers.push([]);
       rooms.push(name);
       timers.push(180);
+      roomStates.push('punning');
     }
 
+    //Set roomIndex variable
+    roomIndex = rooms.findIndex(r => r == uroom);
+
+    //Add user to list of users
+    roomUsers[roomIndex].push(username);
+
     io.emit('rooms', rooms); //Emit rooms list
-    socket.emit('timer', timers[rooms.findIndex(r => r==uroom)]);
+    io.in(uroom).emit('users', roomUsers[roomIndex]); //Emit user list
+    socket.emit('timer', timers[roomIndex]); //Emit timer
+    socket.emit('state', roomStates[roomIndex]);
   });
 
   //Upon a player leaving a room
   socket.on('leave game', function(){
     socket.leave(uroom);
-    var roomIndex = rooms.findIndex(r => r == uroom);
 
-    io.in(uroom).clients((error, clients)=>{
-      //If this is the last person in the room, remove the room from the list
-      if (clients.length == 0)
-        if(roomIndex != -1){
-            rooms.splice(roomIndex, 1);
-            timers.splice(roomIndex, 1);
-          }
-    });
-
-    //Update rooms list for connected clients
-    io.emit('rooms', rooms);
+    leaveCleanup();
 
     io.in(uroom).emit('leave game', uname);
+    io.in(uroom).emit('users', roomUsers[roomIndex]);
     uroom = "";
+    roomIndex = null;
   });
 
   //Upon a user disconnecting
   socket.on('disconnect', function(reason){
-    var roomIndex = rooms.findIndex(r => r == uroom);
+    leaveCleanup();
+    //Send a disconnect message
+    socket.to(uroom).emit('user disconnected', uname);
+  });
+
+  //Handle room arrays when someone leaves a room
+  function leaveCleanup(){
+    //Handle user list
+    if(roomIndex != null && roomUsers[roomIndex] != undefined)
+      var userIndex = roomUsers[roomIndex].findIndex(u => u==uname)
+    else var userIndex = -1;
+    if(userIndex != -1)
+      roomUsers[roomIndex].splice(userIndex, 1);
+    io.in(uroom).emit('users', roomUsers[roomIndex]);
 
     io.in(uroom).clients((error, clients)=>{
       //If this is the last person in the room, remove the room from the list
@@ -118,14 +138,12 @@ io.on('connection', function(socket){
         if(roomIndex != -1){
             rooms.splice(roomIndex, 1);
             timers.splice(roomIndex, 1);
+            roomStates.splice(roomIndex, 1);
+            roomUsers.splice(roomIndex, 1);
           }
     });
 
-    //Send a disconnect message
-    socket.to(uroom).emit('user disconnected', uname);
-
     //Update rooms list for connected clients
     io.emit('rooms', rooms);
-  });
-
+  }
 });

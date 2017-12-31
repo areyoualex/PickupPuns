@@ -1,7 +1,7 @@
 //Variables/aliases for interacting with the game
 var game = {};
 var socket = io(); //Server connection variable
-game.timer, game.username;
+game.timer, game.username, game.userlist, game.state;
 
 
 //Functions for interacting with the game
@@ -39,6 +39,8 @@ $(function(){
 
     //Show timer in the game
     $('#timer').html(Math.floor(game.timer/60) + ' minutes '+game.timer%60+' seconds left');
+    if(game.timer == 0)
+      $('#timer').html('Time\'s up!');
   }, 1000);
 
   //Textarea submitting snippet

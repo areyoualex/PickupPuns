@@ -4,7 +4,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <title>Pickup Puns!</title>
     <meta charset="utf-8">
-    <meta name=viewport content='width=500'>
+    <meta name=viewport content='width=600'>
     <link rel="stylesheet" href="style.css" type="text/css">
   </head>
   <script src="/socket.io/socket.io.js"></script>
@@ -38,28 +38,31 @@
 
       <form id="signin">
         <p class="prompt">Enter your name:</p>
-        <input type="text" class="answer" autocomplete="off" required>
-        <br>
+        <input type="text" required="true" class="answer">
         <p class="prompt">Game name:</p>
-        <input type="text" class="answer" autocomplete="off" required>
+        <input type="text" required="true" class="answer">
         </br>
-        <p><input type="submit" id="Submit" value="Enter"></p>
+        <p><input type="submit" class="Submit" value="Enter"></p>
       </form>
 
       <div id="pungame">
         <button id="leave">Leave game</button>
-        <p id='timer'></p>
-        <ul id="punlist">
-        </ul>
+        <p id="timer"></p>
+        <div id="game">
+          <ul id="punlist">
+          </ul>
+          <ul id="userlist">
+          </ul>
 
-        <form action="#" id="puninput">
-          <br>
-          <textarea spellcheck="true" required="true" autocomplete="off" id="text" name="text_name"
-          onCopy="return false" onDrag="return false" onDrop="return false"
-          onPaste="alert('Please don\'t paste pick up lines! Naughty!'); return false"></textarea>
-          <br>
-          <button id="Submit1">Pun!</button>
-        </form>
+          <form action="#" id="puninput">
+            <br>
+            <textarea spellcheck="true" required="true" id="text" name="text_name"
+            onCopy="return false" onDrag="return false" onDrop="return false"
+            onPaste="alert('Please don\'t paste pick up lines! Naughty!'); return false"></textarea>
+            <br>
+            <button class="Submit" id="Submit">Pun!</button>
+          </form>
+        </div>
       </div>
 	</body>
 </html>

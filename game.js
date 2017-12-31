@@ -13,6 +13,8 @@ $(function () {
   //Leaving current game
   $('#leave').click(function(){
     game.leave(); //Tell server to leave the room
+    game.timer = -1;
+    game.userlist = null;
     switchView("pungame", "start"); //Show the start screen
   });
 
@@ -55,7 +57,6 @@ $(function () {
   //Upon receiving message that a user has left
   socket.on('leave game', function(username){
     game.show("<p>"+username+" has left the game. </p>");
-    game.timer = 0;
   });
 
   //Upon receiving message that a new user has joined
@@ -75,12 +76,32 @@ $(function () {
       $('#rooms').append("<p>No one's playing right now... Make a new game!</p>");
   });
 
+  //Upon receiving the user list
+  socket.on('users', function(users){
+    //Set userlist
+    game.userlist = users;
+    $('#userlist').empty();
+    game.userlist.forEach((user)=>{
+      $('#userlist').append("<li class='user'>"+user+"</li>");
+    });
+  });
+
+  //Upon receiving the game state
+  socket.on('state', function(state){
+    game.state = state;
+    if (state == 'judging'){
+      $('#Submit').prop('disabled', true);
+    } else {
+      $('#Submit').prop('disabled', false);
+    }
+  });
+
   //Upon receiving the timer
   socket.on('timer', function(timer){
     game.timer = timer; //Set the timer
   });
 });
- 
+
 //Handle display of timer
 /*
 setInterval(()=>{

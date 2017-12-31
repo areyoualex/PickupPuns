@@ -56,7 +56,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-  #Submit {
+  .Submit {
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     border-radius: 8px;
@@ -73,7 +73,7 @@
 }
 
 @media screen and (max-width: 1023px) {
-  #Submit {
+  .Submit {
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     border-radius: 8px;
@@ -145,12 +145,25 @@
 #punlist {
   /*float: middle;
   */
-  width: 85%;
+  width: 60%;
   height: 60%;
+  padding: 5%;
   overflow-y: scroll;
   word-wrap: break-word;
   word-break: break-all;
-  margin:auto
+  margin: auto;
+  display: inline-block;
+  float: left;
+}
+
+#userlist {
+  width: 20%;
+  height: 60%;
+  padding: 5%;
+  margin: auto;
+  overflow-y: scroll;
+  display: inline-block;
+  float: left;
 }
 
 #puninput {
@@ -162,6 +175,11 @@
   width: 70%;
   height: 500px;
   display: none;
+  margin: auto;
+}
+
+#game {
+  height: 500px;
   margin: auto;
 }
 
