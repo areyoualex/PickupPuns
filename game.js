@@ -80,3 +80,32 @@ $(function () {
     game.timer = timer; //Set the timer
   });
 });
+ 
+//Handle display of timer
+/*
+setInterval(()=>{
+  //Display time on website
+  if(window.minutes != 1 && window.minutes != 0 && window.minutes >=0 && typeof window.minutes !== 'undefined' && window.seconds >= 0 && typeof window.seconds !== 'undefined'){
+    //regular print with >1 minutes
+    document.getElementById('time').innerHTML = window.minutes + " minutes " + window.seconds + " seconds";
+    window.timer--;
+  } else if (window.minutes == 0 && typeof window.minutes !== 'undefined' && window.seconds >= 0 && typeof window.seconds !== 'undefined'){
+    //printing with no minutes
+    document.getElementById('time').innerHTML = window.seconds + " seconds";
+    window.timer--;
+  } else if (window.minutes == 1 && window.minutes >=0 && typeof window.minutes !== 'undefined' && window.seconds >= 0 && typeof window.seconds !== 'undefined'){
+    //printing with 1 minute
+    document.getElementById('time').innerHTML = window.minutes + " minute " + window.seconds + " seconds";
+    window.timer--;
+  }
+
+  window.minutes = Math.floor(window.timer/60);
+  window.seconds = window.timer%60
+  if(window.timer == 0){ io(); }
+}, 1000);
+
+
+
+//Upon receiving the time
+socket.on('timer', (t)=> { timer = t; });
+*/
