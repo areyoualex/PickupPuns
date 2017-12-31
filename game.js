@@ -1,144 +1,77 @@
-//Timer variable
-window.timer;
-
-//Server connection variable
-var socket = io();
-
-//Username variable
-var username;
-
-//This will send the pun to the server upon the form being submitted
-//It's a JQueryblock
 $(function () {
   //Creating new game
   $('#createGame').click(function(){
-    $('#signin').css({"display":"block"});
-    $('#start').css({"display":"none"})
+    switchView(views.start, views.signIn);
   });
 
   //Joining existing game
   $('#joinGame').click(function(){
-    //Ask for rooms list
-    socket.emit('rooms');
-    $('#start').css({"display":"none"});
-    $('#rooms').css({"display":"block"});
+    socket.emit('rooms'); //Ask for rooms list
+    switchView(views.start, views.rooms);
   });
 
   //Leaving current game
   $('#leave').click(function(){
-    //Tell server to leave the room
-    socket.emit('leave game');
-
-    //Clear the message list
-    $('#punlist').html("");
-    //Show the start screen
-
-    $('#pungame').css({"display":"none"});
-    $('#start').css({"display":"flex"});
+    game.leave(); //Tell server to leave the room
+    switchView(views.game, views.start); //Show the start screen
   });
 
   //Upon a room button being clicked
-  $('#rooms').delegate(".room", "click", function(){
+  views.rooms.delegate(".room", "click", function(){
     var username = $('#rooms > input').val();
-    if (username == "")
-      alert("Please enter a username.");
-    else {
-      socket.emit('join game', $(this).html(), username);
-      //Show game and hide rooms list
-      $('#pungame').css({"display":"block"});
-      $('#rooms').css({"display":"none"});
+    var room = $(this).html();
+
+    game.join(username, room);
+    switchView(views.rooms, views.game); //Show game and hide rooms list
     }
   });
 
   //Function to show game after sign-in
   $('#signin').submit(function(e){
-    //Prevent page refresh
-    e.preventDefault();
+    e.preventDefault(); //Prevent page refresh
+    switchView(views.signIn, views.game); //Make pungame visible
 
-    //Make pungame visible
-    document.getElementById('signin').style.display = "none";
-    document.getElementById('pungame').style.display = "block";
-
-    //Send username and room to server
-    var elements = document.getElementById('signin').getElementsByTagName('input');
-    socket.emit('join game', elements[1].value, elements[0].value);
-    username = elements[0].value;
-  });
-
-  //Get pun <ul> element
-  var puns = $('#punlist');
-
-  //Textarea submitting
-  $("#text").keypress(function (e) {
-    if(e.which == 13 && !e.shiftKey) {        
-        $(this).closest("form").submit();
-        e.preventDefault();
-        return false;
-    }
+    var username = $('#signin input[text]:eq(0)');
+    var room = $('#signin input[text]:eq(1)');
+    game.join(username, room); //Send username and room to server
   });
 
   //Upon sending a pun
-  $('#puninput').submit(function(e){
-    //Don't refresh the page
-    e.preventDefault();
-
-    /*
-    //Add the pun the user sent to the punlist
-    puns.innerHTML = puns.innerHTML + "<li> <p>"+username+" said: </p>"
-      + document.getElementById('text').value + "</li>";
-    */
-
-    //Scroll to the bottom of the punlist
-    puns.scrollTop(puns.prop('scrollHeight'));
-
-    //Send the pun to the server
-    socket.emit('pun', $('#text').val());
-    $('#text').val('');
+  views.game.input.submit(function(e){
+    e.preventDefault(); //Don't refresh the page
+    game.submitPun(); //Send the pun to the server
     return false;
   });
 
   //Upon receiving a pun from the server
   socket.on('pun', (username, msg)=> {
-    puns.html(puns.html() + "<li> <p>"+username+" said: </p>" + msg + "</li>");
-    puns.scrollTop(puns.prop('scrollHeight'));
-  });
-
-  //Upon receiving the rooms list
-  socket.on('rooms', (rooms)=>{
-    var roomHTML = "<p>Enter your name:</p><input type='text'>";
-    $('#rooms').html("");
-    rooms.forEach((room)=>{
-      roomHTML = roomHTML + "<p> <button class='room'>" + room + "</button> </p>";
-    });
-
-    //Update list
-    $('#rooms').html(roomHTML);
-
-    //Clear rooms list if empty
-    if (rooms.length == 0)
-      $('#rooms').html("<p>No one's playing right now... Make a new game!</p>");
+    game.show("<p>"username+"said: </p>"+msg);
   });
 
   //Upon receiving message that a user has disconnected
   socket.on('user disconnected', (username)=>{
-    puns.html(puns.html() + "<li> <p>"+username+" has disconnected. </p> </li>");
-    puns.scrollTop(puns.prop('scrollHeight'));
+    game.show("<p>"username+"has disconnected. </p>");
   });
 
   //Upon receiving message that a user has left
   socket.on('leave game', (username)=>{
-    puns.html(puns.html() + "<li> <p>"+username+" has left the game. </p> </li>");
-    puns.scrollTop(puns.prop('scrollHeight'));
+    game.show("<p>"username+"has left the game. </p>");
   });
 
   //Upon receiving message that a new user has joined
   socket.on('new user', (username)=>{
-    puns.html(puns.html() + "<li> <p>"+username+" has joined. </p> </li>");
-    puns.scrollTop(puns.prop('scrollHeight'));
+    game.show("<p>"username+"has joined. </p>");
   });
 });
 
-//Alert user if they try to copy-paste a pun
-function pasteNotice(){
-  alert("Please don't paste pick up lines! Naughty!");
-}
+  //Upon receiving the rooms list
+  socket.on('rooms', (rooms)=>{
+    $('#rooms p:gt(0)').remove();
+    rooms.forEach((room)=>{
+       views.rooms.append("<p> <button class='room'>" + room + "</button> </p>")
+    });
+
+    //Clear rooms list if empty
+    if (rooms.length == 0)
+      views.rooms.append("<p>No one's playing right now... Make a new game!</p>");
+  });

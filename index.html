@@ -23,6 +23,7 @@
       <!-- <h2 id="time"></h2> -->
 
       <script src="game.js"></script>
+      <script src="gameframework.js"></script>
 
       <div id="start">
         <button id="createGame">Create new game</button>
@@ -30,15 +31,16 @@
       </div>
 
       <div id="rooms">
-        <input type="text">
+        <p class="prompt">Enter your name:</p>
+        <input type="text" required="true">
         <p id="buffer">Loading rooms...</p>
       </div>
 
       <form id="signin">
         <p class="prompt">Enter your name:</p>
-        <input type="text" class="answer">
+        <input type="text" required="true" class="answer">
         <p class="prompt">Game name:</p>
-        <input type="text" class="answer">
+        <input type="text" required="true" class="answer">
         </br>
         <p><input type="submit" id="Submit" value="Enter"></p>
       </form>
@@ -52,7 +54,7 @@
           <br>
           <textarea spellcheck="true" required="true" id="text" name="text_name"
           onCopy="return false" onDrag="return false" onDrop="return false"
-          onPaste="pasteNotice(); return false"></textarea>
+          onPaste="alert('Please don\'t paste pick up lines! Naughty!'); return false"></textarea>
           <br>
           <button id="Submit">Pun!</button>
         </form>
