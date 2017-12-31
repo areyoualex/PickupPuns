@@ -55,6 +55,7 @@ $(function () {
   //Upon receiving message that a user has left
   socket.on('leave game', function(username){
     game.show("<p>"+username+" has left the game. </p>");
+    game.timer = 0;
   });
 
   //Upon receiving message that a new user has joined
@@ -72,5 +73,10 @@ $(function () {
     //Clear rooms list if empty
     if (rooms.length == 0)
       $('#rooms').append("<p>No one's playing right now... Make a new game!</p>");
+  });
+
+  //Upon receiving the timer
+  socket.on('timer', function(timer){
+    game.timer = timer; //Set the timer
   });
 });

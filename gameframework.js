@@ -32,8 +32,15 @@ function switchView(hideBlock, showBlock){
   $("#"+showBlock).show();
   $("#"+hideBlock).hide();
 }
-
 $(function(){
+  //Handle timer display
+  setInterval(function(){
+    if(game.timer > 0) game.timer--; //Tick down timer
+
+    //Show timer in the game
+    $('#timer').html(Math.floor(game.timer/60) + ' minutes '+game.timer%60+' seconds left');
+  }, 1000);
+
   //Textarea submitting snippet
   $("#text").keypress(function (e) {
     if(e.which == 13 && !e.shiftKey) {
