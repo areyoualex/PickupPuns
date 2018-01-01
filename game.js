@@ -68,7 +68,7 @@ $(function () {
   socket.on('rooms', function(rooms){
     $('#rooms p:gt(0)').remove();
     rooms.forEach((room)=>{
-       $('#rooms').append("<p> <button class='room'>" + room + "</button> </p>")
+       $('#rooms').append("<p> <button class='room'>" + room + "</button> </p>");
     });
 
     //Clear rooms list if empty
@@ -90,9 +90,9 @@ $(function () {
   socket.on('state', function(state){
     game.state = state;
     if (state == 'judging'){
-      $('#Submit').prop('disabled', true);
+      $('#Submit1').prop('disabled', true);
     } else {
-      $('#Submit').prop('disabled', false);
+      $('#Submit1').prop('disabled', false);
     }
   });
 
