@@ -67,7 +67,7 @@ $(function () {
   //Upon receiving the rooms list
   socket.on('rooms', function(rooms){
     $('#rooms p:gt(0)').remove();
-    rooms.forEach((room)=>{
+    rooms.forEach(function(room){
        $('#rooms').append("<p> <button class='room'>" + room + "</button> </p>");
     });
 
@@ -81,7 +81,7 @@ $(function () {
     //Set userlist
     game.userlist = users;
     $('#userlist').empty();
-    game.userlist.forEach((user)=>{
+    game.userlist.forEach(function(user){
       $('#userlist').append("<li class='user'>"+user+"</li>");
     });
   });
