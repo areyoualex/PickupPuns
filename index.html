@@ -4,7 +4,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <title>Pickup Puns!</title>
     <meta charset="utf-8">
-    <meta name=viewport content='width=600'>
+    <meta name=viewport content='width=500'>
     <link rel="stylesheet" href="style.css" type="text/css">
   </head>
   <script src="/socket.io/socket.io.js"></script>
@@ -18,7 +18,6 @@
   </script>
     <body style="background-color: #ff6347">
       </script src="https://cdn.rawgit.com/downloads/uxebu/bonsai/bonsai-0.4.1.min.js">
-      <br>
       <h1>Pickup Puns!</h1>
       <!-- <h2 id="time"></h2> -->
 
@@ -38,31 +37,28 @@
 
       <form id="signin">
         <p class="prompt">Enter your name:</p>
-        <input type="text" required="true" class="answer">
+        <input type="text" class="answer" autocomplete="off" required>
+        <br>
         <p class="prompt">Game name:</p>
-        <input type="text" required="true" class="answer">
+        <input type="text" class="answer" autocomplete="off" required>
         </br>
-        <p><input type="submit" class="Submit" value="Enter"></p>
+        <p><input type="submit" id="Submit" value="Enter"></p>
       </form>
 
       <div id="pungame">
         <button id="leave">Leave game</button>
-        <p id="timer"></p>
-        <div id="game">
-          <ul id="punlist">
-          </ul>
-          <ul id="userlist">
-          </ul>
+        <p id='timer'></p>
+        <ul id="punlist">
+        </ul>
 
-          <form action="#" id="puninput">
-            <br>
-            <textarea spellcheck="true" required="true" id="text" name="text_name"
-            onCopy="return false" onDrag="return false" onDrop="return false"
-            onPaste="alert('Please don\'t paste pick up lines! Naughty!'); return false"></textarea>
-            <br>
-            <button class="Submit" id="Submit">Pun!</button>
-          </form>
-        </div>
+        <form action="#" id="puninput">
+          <br>
+          <textarea spellcheck="true" required="true" autocomplete="off" id="text" name="text_name"
+          onCopy="return false" onDrag="return false" onDrop="return false"
+          onPaste="alert('Please don\'t paste pick up lines! Naughty!'); return false"></textarea>
+          <br>
+          <button id="Submit1">Pun!</button>
+        </form>
       </div>
 	</body>
 </html>
