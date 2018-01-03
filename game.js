@@ -68,7 +68,7 @@ $(function () {
   socket.on('rooms', function(rooms){
     $('#rooms p:gt(0)').remove();
     rooms.forEach(function(room){
-       $('#rooms').append("<p> <button class='room'>" + room + "</button> </p>");
+       $('#rooms').append("<p> <button class='room'>" + room.name+ "</button> </p>");
     });
 
     //Clear rooms list if empty
